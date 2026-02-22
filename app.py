@@ -3,7 +3,7 @@ import sys
 import os
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from agents.rotation_agent import generate_rotation_plan
+from rotation_agent import generate_rotation_plan
 
 app = Flask(__name__)
 
@@ -30,4 +30,4 @@ def generate_plan():
     return jsonify(result)
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)), debug=True)
+    app.run()
