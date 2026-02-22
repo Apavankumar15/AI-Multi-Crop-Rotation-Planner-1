@@ -49,11 +49,11 @@ else:
         "raw_output": raw_output
     }
 
-    except Exception as e:
-        return {
-            "error": "Something went wrong",
-            "details": str(e)
-        }
+except Exception as e:
+    print("ERROR:", str(e))   # <-- IMPORTANT
+    return {
+        "error": str(e)
+    }
 
 
 # import json
