@@ -33,12 +33,21 @@ def generate_rotation_plan(soil_type, current_crop, season, water_level):
             temperature=0.3
         )
 
-        raw_output = response.choices[0].message.content.strip()
+       raw_output = response.choices[0].message.content.strip()
 
-        # Try to parse model response as JSON
-        structured_output = json.loads(raw_output)
+# Extract JSON part safely
+start = raw_output.find("{")
+end = raw_output.rfind("}") + 1
 
-        return structured_output
+if start != -1 and end != -1:
+    json_string = raw_output[start:end]
+    structured_output = json.loads(json_string)
+    return structured_output
+else:
+    return {
+        "error": "Model did not return valid JSON",
+        "raw_output": raw_output
+    }
 
     except Exception as e:
         return {
